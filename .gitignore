@@ -7,8 +7,6 @@ __pycache__/
 *.so
 
 # User
-
-proxy_data.py
 *.service
 
 # Distribution / packaging
