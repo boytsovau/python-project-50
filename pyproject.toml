@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["boytsovau <alexbonch@gmail.com>"]
 readme = "README.md"
-packages = [{include = "hexlet_code"}]
+packages = [{include = "gendiff"}]
 
 classifiers = [
     "Topic :: File Formats"
@@ -12,6 +12,10 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+
+[tool.poetry.scripts]
+
+gendiff = "gendiff.main:main"
 
 
 [tool.poetry.group.dev.dependencies]
