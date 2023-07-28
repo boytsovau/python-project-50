@@ -15,7 +15,7 @@ python = "^3.10"
 
 [tool.poetry.scripts]
 
-gendiff = "gendiff.main:main"
+gendiff = "gendiff.diff:main"
 
 
 [tool.poetry.group.dev.dependencies]
