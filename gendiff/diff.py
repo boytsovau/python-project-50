@@ -3,8 +3,10 @@ import json
 
 
 def generate_diff(file1, file2):
-    data1 = json.load(open(file1))
-    data2 = json.load(open(file2))
+    with open(file1) as f1, open(file2) as f2:
+        data1 = json.load(f1)
+        data2 = json.load(f2)
+
     diff = {}
 
     for k, v in data1.items():
