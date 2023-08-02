@@ -20,6 +20,7 @@ gendiff = "gendiff.diff:main"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
+pytest = "^7.4.0"
 
 [build-system]
 requires = ["poetry-core"]
