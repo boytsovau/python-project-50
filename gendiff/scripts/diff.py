@@ -3,27 +3,30 @@ import yaml
 import pathlib
 
 
-def generate_diff(file1, file2):
+def generate_diff(file1, file2, format='stylish'):
 
     data1 = open_file(file1, check_extension(file1))
     data2 = open_file(file2, check_extension(file2))
-    diff = {}
 
-    for k, v in data1.items():
-        if k in data2:
-            if v == data2[k]:
-                diff[f'  {k}'] = v
+    def inner_diff(data1, data2, d=0):
+        diff = {}
+        for k, v in data1.items():
+            if k in data2:
+                if isinstance(data1[k], dict) and isinstance(data2[k], dict):
+                    diff[f'  {k}'] = {'value': inner_diff(data1[k], data2[k], d + 1), 'deep': d + 1}
+                elif data1[k] == data2[k]:
+                    diff[f'  {k}'] = {'value': v, 'deep': d + 1}
+                else:
+                    diff[f'- {k}'] = {'value': v, 'deep': d + 1}
+                    diff[f'+ {k}'] = {'value': data2[k], 'deep': d + 1}
             else:
-                diff[f'- {k}'] = v
-                diff[f'+ {k}'] = data2[k]
-        else:
-            diff[f'- {k}'] = v
+                diff[f'- {k}'] = {'value': v, 'deep': d + 1}
+        for k2, v2 in data2.items():
+            if k2 not in data1:
+                diff[f'+ {k2}'] = {'value': v2, 'deep': d + 1}
+        return diff
 
-    for k2, v2 in data2.items():
-        if k2 not in data1:
-            diff[f'+ {k2}'] = v2
-
-    return '{\n' + '\n'.join([f'{key}: {val}' for key, val in diff.items()]) + '\n}'
+    return inner_diff(data1, data2)
 
 
 def check_extension(file):
@@ -43,4 +46,4 @@ def open_file(file, extension):
 
 
 if __name__ == "__main__":
-    generate_diff("./tests/fixtures/file1.json", "./tests/fixtures/file2.yaml")
+    print(generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.json"))
