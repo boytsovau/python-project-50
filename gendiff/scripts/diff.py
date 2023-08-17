@@ -16,6 +16,9 @@ def generate_diff(file1, file2):
                     diff[f'  {k}'] = {'values': inner_diff(data1[k], data2[k], d + 1), 'depth': d + 1}
                 elif data1[k] == data2[k]:
                     diff[f'  {k}'] = {'values': v, 'depth': d + 1}
+                elif isinstance(data1[k], dict) and not isinstance(data2[k], dict):
+                    diff[f'- {k}'] = {'values': v, 'depth': d + 1}
+                    diff[f'+ {k}'] = {'values': data2[k], 'depth': d + 1}
                 else:
                     diff[f'- {k}'] = {'values': v, 'depth': d + 1}
                     diff[f'+ {k}'] = {'values': data2[k], 'depth': d + 1}
