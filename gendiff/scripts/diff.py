@@ -13,17 +13,17 @@ def generate_diff(file1, file2):
         for k, v in data1.items():
             if k in data2:
                 if isinstance(data1[k], dict) and isinstance(data2[k], dict):
-                    diff[f'  {k}'] = {'value': inner_diff(data1[k], data2[k], d + 1), 'deep': d + 1}
+                    diff[f'  {k}'] = {'values': inner_diff(data1[k], data2[k], d + 1), 'depth': d + 1}
                 elif data1[k] == data2[k]:
-                    diff[f'  {k}'] = {'value': v, 'deep': d + 1}
+                    diff[f'  {k}'] = {'values': v, 'depth': d + 1}
                 else:
-                    diff[f'- {k}'] = {'value': v, 'deep': d + 1}
-                    diff[f'+ {k}'] = {'value': data2[k], 'deep': d + 1}
+                    diff[f'- {k}'] = {'values': v, 'depth': d + 1}
+                    diff[f'+ {k}'] = {'values': data2[k], 'depth': d + 1}
             else:
-                diff[f'- {k}'] = {'value': v, 'deep': d + 1}
+                diff[f'- {k}'] = {'values': v, 'depth': d + 1}
         for k2, v2 in data2.items():
             if k2 not in data1:
-                diff[f'+ {k2}'] = {'value': v2, 'deep': d + 1}
+                diff[f'+ {k2}'] = {'values': v2, 'depth': d + 1}
         return diff
 
     return inner_diff(data1, data2)
@@ -35,12 +35,12 @@ def formater(diff, format='stylish'):
 
         def inner_format(data):
             for key, val in data.items():
-                if isinstance(val['value'], dict):
-                    result.append(f"{' ' * val['deep']}{key}: {{")
-                    inner_format(val['value'])
-                    result.append(f"{' ' * val['deep']}}}")
+                if isinstance(val['values'], dict):
+                    result.append(f"{'  ' * val['depth']}{key}: {{")
+                    inner_format(val['values'])
+                    result.append(f"{'  ' * val['depth']}}}")
                 else:
-                    result.append(f"{' ' * val['deep']}{key}: {val['value']}")
+                    result.append(f"{'  ' * val['depth']}{key}: {val['values']}")
             return '{\n' + '\n'.join(result) + '\n}'
         return inner_format(diff)
 
@@ -62,5 +62,6 @@ def open_file(file, extension):
 
 
 if __name__ == "__main__":
-    diff = generate_diff("./tests/fixtures/file1.json", "./tests/fixtures/file2.json")
+    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.json")
+    # print(diff)
     print(formater(diff))

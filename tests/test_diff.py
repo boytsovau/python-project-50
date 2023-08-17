@@ -16,7 +16,7 @@ def test_yml():
 def test_json():
     with open("tests/fixtures/expected.txt", 'r') as file:
         expected = file.read()
-    assert generate_diff("tests/fixtures/file.json", "tests/fixtures/file2.json") == expected
+    assert generate_diff("tests/fixtures/file1.json", "tests/fixtures/file2.json") == expected
 
 
 def test_json_req():
