@@ -3,7 +3,7 @@ import yaml
 import pathlib
 
 
-def generate_diff(file1, file2, format='stylish'):
+def generate_diff(file1, file2):
 
     data1 = open_file(file1, check_extension(file1))
     data2 = open_file(file2, check_extension(file2))
@@ -29,6 +29,22 @@ def generate_diff(file1, file2, format='stylish'):
     return inner_diff(data1, data2)
 
 
+def formater(diff, format='stylish'):
+    if format == 'stylish':
+        result = []
+
+        def inner_format(data):
+            for key, val in data.items():
+                if isinstance(val['value'], dict):
+                    result.append(f"{' ' * val['deep']}{key}: {{")
+                    inner_format(val['value'])
+                    result.append(f"{' ' * val['deep']}}}")
+                else:
+                    result.append(f"{' ' * val['deep']}{key}: {val['value']}")
+            return '{\n' + '\n'.join(result) + '\n}'
+        return inner_format(diff)
+
+
 def check_extension(file):
     data = pathlib.PurePath(file).suffix.strip('.')
     return data
@@ -46,4 +62,5 @@ def open_file(file, extension):
 
 
 if __name__ == "__main__":
-    print(generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.json"))
+    diff = generate_diff("./tests/fixtures/file1.json", "./tests/fixtures/file2.json")
+    print(formater(diff))

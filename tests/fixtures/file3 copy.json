@@ -1,0 +1,8 @@
+{
+  '  host': {'value': 'hexlet.io', 'deep': 1},
+  '- timeout': {'value': 50, 'deep': 1},
+  '+ timeout': {'value': 20, 'deep': 1},
+  '- proxy': {'value': '123.234.53.22', 'deep': 1},
+  '- follow': {'value': False, 'deep': 1}, 
+  '+ verbose': {'value': True, 'deep': 1}
+}
