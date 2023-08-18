@@ -13,35 +13,25 @@ def generate_diff(file1, file2):
         for k, v in data1.items():
             if k in data2:
                 if isinstance(data1[k], dict) and isinstance(data2[k], dict):
-                    diff[f'{k}'] = {'meta': {
+                    diff[f'{k}'] = {
                         'action': 'nested',
-                        'children': inner_diff(data1[k], data2[k])}}
+                        'children': inner_diff(data1[k], data2[k])}
                 elif data1[k] == data2[k]:
-                    diff[f'{k}'] = {'meta': {
+                    diff[f'{k}'] = {
                         'value': v,
-                        'action': 'unchanged'}}
+                        'action': 'unchanged'}
                 elif data1[k] != data2[k]:
-                    diff[f'{k}'] = {'meta': {
+                    diff[f'{k}'] = {
                         'action': 'update',
                         "old_value": v,
-                        "new_value": data2[k]}}
+                        "new_value": data2[k]}
             else:
-                if isinstance(v, dict):
-                    diff[f'{k}'] = {'meta': {
-                        'action': 'nested',
-                        'children': inner_diff(v, {})}}
-                else:
-                    diff[f'{k}'] = {'meta': {
-                        'value': v,
-                        'action': 'delete'}}
+                diff[f'{k}'] = {
+                    'value': v,
+                    'action': 'delete'}
         for k2, v2 in data2.items():
             if k2 not in data1:
-                if isinstance(v2, dict):
-                    diff[f'{k2}'] = {'meta': {
-                        'action': 'nested',
-                        'children': inner_diff({}, v2)}}
-                else:
-                    diff[f'{k2}'] = {'meta': {'values': v2, 'action': 'added'}}
+                diff[f'{k2}'] = {'value': v2, 'action': 'added'}
         return diff
     return inner_diff(data1, data2)
 
@@ -52,20 +42,20 @@ def formater(diff, format='stylish'):
 
         def inner_format(data, depth=0):
             for key, val in data.items():
-                action = val['meta']['action']
+                action = val.get('action')
                 if action == 'nested':
                     result.append(f"{'  ' * depth}  {key}: {{")
-                    inner_format(val['meta']['children'], depth + 1)
+                    inner_format(val['children'], depth + 1)
                     result.append(f"{'  ' * depth}  }}")
                 elif action == 'unchanged':
-                    result.append(f"{'  ' * depth}  {key}: {val['meta']['value']}")
+                    result.append(f"{'  ' * depth}  {key}: {val['value']}")
                 elif action == 'update':
-                    result.append(f"{'  ' * depth}- {key}: {val['meta']['old_value']}")
-                    result.append(f"{'  ' * depth}+ {key}: {val['meta']['new_value']}")
+                    result.append(f"{'  ' * depth}- {key}: {val['old_value']}")
+                    result.append(f"{'  ' * depth}+ {key}: {val['new_value']}")
                 elif action == 'delete':
-                    result.append(f"{'  ' * depth}- {key}: {val['meta']['value']}")
+                    result.append(f"{'  ' * depth}- {key}: {val['value']}")
                 elif action == 'added':
-                    result.append(f"{'  ' * depth}+ {key}: {val['meta']['values']}")
+                    result.append(f"{'  ' * depth}+ {key}: {val['value']}")
 
         inner_format(diff)
         return '{\n' + '\n'.join(result) + '\n}'
