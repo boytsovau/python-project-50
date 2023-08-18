@@ -26,12 +26,22 @@ def generate_diff(file1, file2):
                         "old_value": v,
                         "new_value": data2[k]}}
             else:
-                diff[f'{k}'] = {'meta': {
-                    'value': v,
-                    'action': 'delete'}}
+                if isinstance(v, dict):
+                    diff[f'{k}'] = {'meta': {
+                        'action': 'nested',
+                        'children': inner_diff(v, {})}}
+                else:
+                    diff[f'{k}'] = {'meta': {
+                        'value': v,
+                        'action': 'delete'}}
         for k2, v2 in data2.items():
             if k2 not in data1:
-                diff[f'{k2}'] = {'meta': {'values': v2, 'action': 'added'}}
+                if isinstance(v2, dict):
+                    diff[f'{k2}'] = {'meta': {
+                        'action': 'nested',
+                        'children': inner_diff({}, v2)}}
+                else:
+                    diff[f'{k2}'] = {'meta': {'values': v2, 'action': 'added'}}
         return diff
     return inner_diff(data1, data2)
 
