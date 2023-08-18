@@ -12,14 +12,11 @@ def generate_diff(file1, file2):
         diff = {}
         for k, v in data1.items():
             if k in data2:
-                if isinstance(data1[k], dict) and isinstance(data2[k], dict):
-                    diff[f'  {k}'] = {'values': inner_diff(data1[k], data2[k], d + 1), 'depth': d + 1}
-                elif data1[k] == data2[k]:
+                if data1[k] == data2[k]:
                     diff[f'  {k}'] = {'values': v, 'depth': d + 1}
-                elif isinstance(data1[k], dict) and not isinstance(data2[k], dict):
-                    diff[f'- {k}'] = {'values': v, 'depth': d + 1}
-                    diff[f'+ {k}'] = {'values': data2[k], 'depth': d + 1}
-                else:
+                elif isinstance(data1[k], dict) and isinstance(data2[k], dict):
+                    diff[f'  {k}'] = {'values': inner_diff(data1[k], data2[k], d + 1), 'depth': d + 1}
+                elif data1[k] != data2[k]:
                     diff[f'- {k}'] = {'values': v, 'depth': d + 1}
                     diff[f'+ {k}'] = {'values': data2[k], 'depth': d + 1}
             else:
@@ -31,7 +28,6 @@ def generate_diff(file1, file2):
                 else:
                     diff[f'+ {k2}'] = {'values': v2, 'depth': d + 1}
         return diff
-
     return inner_diff(data1, data2)
 
 
@@ -70,4 +66,4 @@ def open_file(file, extension):
 if __name__ == "__main__":
     diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.json")
     print(diff)
-    # print(formater(diff))
+    print(formater(diff))
