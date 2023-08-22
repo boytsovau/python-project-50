@@ -47,19 +47,20 @@ def formater(diff, format='stylish'):
         def inner_format(data, depth=1):
             for key, val in data.items():
                 action = val.get('action')
-                if action == 'nested':
-                    result.append(f"{get_offset(depth)}  {key}: {{")
-                    inner_format(val['children'], depth + 1)
-                    result.append(f"{get_offset(depth)}}}")
-                elif action == 'unchanged':
-                    result.append(f"{get_offset(depth)}  {key}: {to_string(val['value'], depth)}")
-                elif action == 'update':
-                    result.append(f"{get_offset(depth)}- {key}: {to_string(val['old_value'], depth)}")
-                    result.append(f"{get_offset(depth)}+ {key}: {to_string(val['new_value'], depth)}")
-                elif action == 'delete':
-                    result.append(f"{get_offset(depth)}- {key}: {to_string(val['value'], depth)}")
-                elif action == 'added':
-                    result.append(f"{get_offset(depth)}+ {key}: {to_string(val['value'], depth)}")
+                match action:
+                    case 'nested':
+                        result.append(f"{get_offset(depth)}  {key}: {{")
+                        inner_format(val['children'], depth + 1)
+                        result.append(f"{get_offset(depth)}}}")
+                    case 'unchanged':
+                        result.append(f"{get_offset(depth)}  {key}: {to_string(val['value'], depth)}")
+                    case 'update':
+                        result.append(f"{get_offset(depth)}- {key}: {to_string(val['old_value'], depth)}")
+                        result.append(f"{get_offset(depth)}+ {key}: {to_string(val['new_value'], depth)}")
+                    case 'delete':
+                        result.append(f"{get_offset(depth)}- {key}: {to_string(val['value'], depth)}")
+                    case 'added':
+                        result.append(f"{get_offset(depth)}+ {key}: {to_string(val['value'], depth)}")
 
         inner_format(diff)
         return '{\n' + '\n'.join(result) + '\n}'
@@ -98,6 +99,6 @@ def open_file(file, extension):
 
 
 if __name__ == "__main__":
-    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.json")
+    diff = generate_diff("./tests/fixtures/file3.yaml", "./tests/fixtures/file4.yaml")
     print(diff)
     print(formater(diff))
