@@ -44,7 +44,7 @@ def formater(diff, format='stylish'):
     if format == 'stylish':
         result = []
 
-        def inner_format(data, depth=1):
+        def inner_format(data, depth=0):
             for key, val in data.items():
                 action = val.get('action')
                 match action:
@@ -63,7 +63,7 @@ def formater(diff, format='stylish'):
                         result.append(f"{get_offset(depth)}+ {key}: {to_string(val['value'], depth)}")
 
         inner_format(diff)
-        return '{\n' + '\n'.join(result) + '\n}'
+    return '{\n' + '\n'.join(result) + '\n}'
 
 
 def to_string(value, depth=1):
@@ -99,6 +99,6 @@ def open_file(file, extension):
 
 
 if __name__ == "__main__":
-    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.yaml")
+    diff = generate_diff("./tests/fixtures/file1.json", "./tests/fixtures/file2.yaml")
     print(diff)
     print(formater(diff))
