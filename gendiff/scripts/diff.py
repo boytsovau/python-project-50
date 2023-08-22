@@ -49,18 +49,18 @@ def formater(diff, format='stylish'):
                 action = val.get('action')
                 match action:
                     case 'nested':
-                        result.append(f"{get_offset(depth)}  {key}: {{")
+                        result.append(f"{get_offset(depth + 1)}  {key}: {{")
                         inner_format(val['children'], depth + 1)
-                        result.append(f"{get_offset(depth)}}}")
+                        result.append(f"{get_offset(depth + 1)}}}")
                     case 'unchanged':
-                        result.append(f"{get_offset(depth)}  {key}: {to_string(val['value'], depth)}")
+                        result.append(f"{get_offset(depth + 1)}  {key}: {to_string(val['value'], depth + 1)}")
                     case 'update':
-                        result.append(f"{get_offset(depth)}- {key}: {to_string(val['old_value'], depth)}")
-                        result.append(f"{get_offset(depth)}+ {key}: {to_string(val['new_value'], depth)}")
+                        result.append(f"{get_offset(depth + 1)}- {key}: {to_string(val['old_value'], depth + 1)}")
+                        result.append(f"{get_offset(depth + 1)}+ {key}: {to_string(val['new_value'], depth + 1)}")
                     case 'delete':
-                        result.append(f"{get_offset(depth)}- {key}: {to_string(val['value'], depth)}")
+                        result.append(f"{get_offset(depth + 1)}- {key}: {to_string(val['value'], depth + 1)}")
                     case 'added':
-                        result.append(f"{get_offset(depth)}+ {key}: {to_string(val['value'], depth)}")
+                        result.append(f"{get_offset(depth + 1)}+ {key}: {to_string(val['value'], depth + 1)}")
 
         inner_format(diff)
         return '{\n' + '\n'.join(result) + '\n}'
