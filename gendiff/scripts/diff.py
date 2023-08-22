@@ -3,6 +3,10 @@ import yaml
 import pathlib
 
 
+LEVEL_INDENT = 4
+OFFSET = 2
+
+
 def generate_diff(file1, file2):
 
     data1 = open_file(file1, check_extension(file1))
@@ -40,7 +44,7 @@ def formater(diff, format='stylish'):
     if format == 'stylish':
         result = []
 
-        def inner_format(data, depth=0):
+        def inner_format(data, depth=1):
             for key, val in data.items():
                 action = val.get('action')
                 if action == 'nested':
@@ -48,17 +52,34 @@ def formater(diff, format='stylish'):
                     inner_format(val['children'], depth + 1)
                     result.append(f"{'  ' * depth}  }}")
                 elif action == 'unchanged':
-                    result.append(f"{'  ' * depth}  {key}: {val['value']}")
+                    result.append(f"{get_offset(depth)}  {key}: {to_string(val['value'], depth)}")
                 elif action == 'update':
-                    result.append(f"{'  ' * depth}- {key}: {val['old_value']}")
-                    result.append(f"{'  ' * depth}+ {key}: {val['new_value']}")
+                    result.append(f"{get_offset(depth)}- {key}: {to_string(val['old_value'], depth)}")
+                    result.append(f"{get_offset(depth)}+ {key}: {to_string(val['new_value'], depth)}")
                 elif action == 'delete':
-                    result.append(f"{'  ' * depth}- {key}: {val['value']}")
+                    result.append(f"{get_offset(depth)}- {key}: {to_string(val['value'], depth)}")
                 elif action == 'added':
-                    result.append(f"{'  ' * depth}+ {key}: {val['value']}")
+                    result.append(f"{get_offset(depth)}+ {key}: {to_string(val['value'], depth)}")
 
         inner_format(diff)
         return '{\n' + '\n'.join(result) + '\n}'
+
+
+def to_string(value, depth=1):
+    if isinstance(value, dict):
+        result = '{\n'
+        for key, val in value.items():
+            result += f"{get_offset(depth + 1)}{key}: "
+            result += f"{to_string(val, depth + 1)}\n"
+        result += f"{get_offset(depth)}}}"
+    else:
+        result = str(value)
+    return result
+
+
+def get_offset(depth):
+    result = LEVEL_INDENT * depth - OFFSET
+    return ' ' * result
 
 
 def check_extension(file):
