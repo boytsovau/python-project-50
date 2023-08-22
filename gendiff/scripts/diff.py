@@ -98,7 +98,7 @@ def open_file(file, extension):
         return data
 
 
-if __name__ == "__main__":
-    diff = generate_diff("./tests/fixtures/file3.yaml", "./tests/fixtures/file4.yaml")
-    print(diff)
-    print(formater(diff))
+# if __name__ == "__main__":
+#     diff = generate_diff("./tests/fixtures/file1.yml", "./tests/fixtures/file2.yaml")
+#     # print(diff)
+#     print(formater(diff))
