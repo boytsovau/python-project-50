@@ -13,4 +13,3 @@ def main():
     diff = generate_diff(args.first_file, args.second_file)
     result = formater(diff, args.f)
     print(result)
-

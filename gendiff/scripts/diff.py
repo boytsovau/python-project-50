@@ -70,7 +70,7 @@ def to_string(value, depth=1):
         result = '{\n'
         for key, val in value.items():
             result += f"{get_offset(depth + 1)}  {key}: {to_string(val, depth + 1)}\n"
-        result += f"{get_offset(depth)} }}"
+        result += f"{get_offset(depth)}  }}"
     else:
         result = str(value)
     return result
