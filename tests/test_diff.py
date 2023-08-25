@@ -15,8 +15,14 @@ def test_yml():
     assert formater(diff) == expected
 
 
-def test_json_req():
-    with open("tests/fixtures/expected3.txt", 'r') as file:
+# def test_json_req():
+#     with open("tests/fixtures/expected3.txt", 'r') as file:
+#         expected = file.read()
+#     diff = generate_diff("tests/fixtures/file3.json", "tests/fixtures/file4.json")
+#     assert formater(diff) == expected
+
+def test_json_req2():
+    with open("tests/fixtures/result_stylish", 'r') as file:
         expected = file.read()
-    diff = generate_diff("tests/fixtures/file3.json", "tests/fixtures/file4.json")
+    diff = generate_diff("tests/fixtures/file5.json", "tests/fixtures/file6.json")
     assert formater(diff) == expected

@@ -44,7 +44,7 @@ def formater(diff, format='stylish'):
     if format == 'stylish':
         result = []
 
-        def inner_format(data, depth=0):
+        def inner_format(data, depth=1):
             for key, val in data.items():
                 action = val.get('action')
                 match action:
@@ -99,6 +99,6 @@ def open_file(file, extension):
 
 
 if __name__ == "__main__":
-    diff = generate_diff("./tests/fixtures/file1.json", "./tests/fixtures/file2.yaml")
+    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.yaml")
     print(diff)
     print(formater(diff))
