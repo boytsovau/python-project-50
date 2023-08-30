@@ -41,3 +41,7 @@ Generating a report in the form of plain text, stylish and json
 [![asciicast](https://asciinema.org/a/599583.svg)](https://asciinema.org/a/599583)
 
 [![asciicast](https://asciinema.org/a/600345.svg)](https://asciinema.org/a/600345)
+
+# stylish format
+
+[![asciicast](https://asciinema.org/a/605434.svg)](https://asciinema.org/a/605434)
