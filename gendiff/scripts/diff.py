@@ -14,28 +14,30 @@ def generate_diff(file1, file2):
 
     def inner_diff(data1, data2):
         diff = {}
-        for k, v in data1.items():
-            if k in data2:
+        keys = sorted(set(data1.keys()) | set(data2.keys()))
+        for k in keys:
+            if k in data1 and k in data2:
                 if isinstance(data1[k], dict) and isinstance(data2[k], dict):
                     diff[f'{k}'] = {
                         'action': 'nested',
                         'children': inner_diff(data1[k], data2[k])}
                 elif data1[k] == data2[k]:
                     diff[f'{k}'] = {
-                        'value': v,
+                        'value': data1[k],
                         'action': 'unchanged'}
-                elif data1[k] != data2[k]:
+                else:
                     diff[f'{k}'] = {
                         'action': 'update',
-                        "old_value": v,
+                        "old_value": data1[k],
                         "new_value": data2[k]}
-            else:
+            elif k in data1:
                 diff[f'{k}'] = {
-                    'value': v,
+                    'value': data1[k],
                     'action': 'delete'}
-        for k2, v2 in data2.items():
-            if k2 not in data1:
-                diff[f'{k2}'] = {'value': v2, 'action': 'added'}
+            elif k in data2:
+                diff[f'{k}'] = {
+                    'value': data2[k],
+                    'action': 'added'}
         return diff
     return inner_diff(data1, data2)
 
