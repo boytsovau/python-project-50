@@ -74,6 +74,8 @@ def to_string(value, depth=1):
         for key, val in value.items():
             result += f"{get_offset(depth + 1)}  {key}: {to_string(val, depth + 1)}\n"
         result += f"{get_offset(depth)}  }}"
+    elif isinstance(value, bool):
+        result = str(value).lower()
     else:
         result = str(value)
     return result
@@ -101,6 +103,6 @@ def open_file(file, extension):
 
 
 if __name__ == "__main__":
-    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.yaml")
+    diff = generate_diff("./tests/fixtures/file1.json", "./tests/fixtures/file2.yaml")
     print(diff)
     print(formater(diff))
