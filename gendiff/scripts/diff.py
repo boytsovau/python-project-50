@@ -53,7 +53,7 @@ def formater(diff, format='stylish'):
                     case 'nested':
                         result.append(f"{get_offset(depth)}  {key}: {{")
                         inner_format(val['children'], depth + 1)
-                        result.append(f"{get_offset(depth)}}}")
+                        result.append(f"{get_offset(depth)}  }}")
                     case 'unchanged':
                         result.append(f"{get_offset(depth)}  {key}: {to_string(val['value'], depth)}")
                     case 'update':
