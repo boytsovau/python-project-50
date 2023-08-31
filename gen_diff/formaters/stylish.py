@@ -20,4 +20,4 @@ def stylish_format(data, depth=1):
                 result.append(f"{get_offset(depth)}- {key}: {to_string(val['value'], depth)}")
             case 'added':
                 result.append(f"{get_offset(depth)}+ {key}: {to_string(val['value'], depth)}")
-        return '{\n' + '\n'.join(result) + '\n}'
+    return '{\n' + '\n'.join(result) + '\n}'
