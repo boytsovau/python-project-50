@@ -1,14 +1,14 @@
-from scripts.core import get_offset
+from gendiff.scripts.core import get_offset
 
 
-def stylish(data, depth=1):
+def stylish_format(data, depth=1):
     result = []
     for key, val in data.items():
         action = val.get('action')
         match action:
             case 'nested':
                 result.append(f"{get_offset(depth)}  {key}: {{")
-                stylish(val['children'], depth + 1)
+                stylish_format(val['children'], depth + 1)
                 result.append(f"{get_offset(depth)}  }}")
             case 'unchanged':
                 result.append(f"{get_offset(depth)}  {key}: {to_string(val['value'], depth)}")
