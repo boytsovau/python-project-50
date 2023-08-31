@@ -1,4 +1,4 @@
-from scripts.core import open_file, check_extension
+from core import open_file, check_extension
 from gendiff.formaters.stylish import stylish_format
 
 
@@ -8,7 +8,7 @@ def generate_diff(file1, file2, format='stylish'):
     data2 = open_file(file2, check_extension(file2))
 
     diff = get_diff(data1, data2)
-    result = format(diff, format)
+    result = formater(diff, format)
     return result
 
 
@@ -20,7 +20,7 @@ def get_diff(data1, data2):
             if isinstance(data1[k], dict) and isinstance(data2[k], dict):
                 diff[f'{k}'] = {
                     'action': 'nested',
-                    'children': diff(data1[k], data2[k])}
+                    'children': get_diff(data1[k], data2[k])}
             elif data1[k] == data2[k]:
                 diff[f'{k}'] = {
                     'value': data1[k],
