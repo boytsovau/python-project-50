@@ -1,5 +1,5 @@
-from core import open_file, check_extension
-from gendiff.formaters.stylish import stylish_format
+from gen_diff.core import open_file, check_extension
+from gen_diff.formaters.stylish import stylish_format
 
 
 def generate_diff(file1, file2, format='stylish'):
@@ -12,8 +12,10 @@ def generate_diff(file1, file2, format='stylish'):
     return result
 
 
+diff = {}
+
+
 def get_diff(data1, data2):
-    diff = {}
     keys = sorted(set(data1.keys()) | set(data2.keys()))
     for k in keys:
         if k in data1 and k in data2:
@@ -48,5 +50,5 @@ def formater(diff, format):
 
 
 if __name__ == '__main__':
-    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.yaml")
+    diff = generate_diff("./tests/fixtures/file1.json", "./tests/fixtures/file2.yaml")
     print(diff)

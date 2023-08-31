@@ -1,4 +1,4 @@
-from gendiff.scripts.diff import generate_diff
+from gen_diff.scripts.diff import generate_diff
 
 
 def test_json():
@@ -27,3 +27,6 @@ def test_json_plain():
         expected = file.read()
     diff = generate_diff("tests/fixtures/file3.json", "tests/fixtures/file4.json", 'plain')
     assert diff == expected
+
+
+

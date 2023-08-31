@@ -1,8 +1,10 @@
-from gendiff.scripts.core import get_offset
+from gen_diff.core import get_offset
+
+
+result = []
 
 
 def stylish_format(data, depth=1):
-    result = []
     for key, val in data.items():
         action = val.get('action')
         match action:
