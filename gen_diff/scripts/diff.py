@@ -11,10 +11,8 @@ def generate_diff(file1, file2, format='stylish'):
     return formater(diff, format)
 
 
-diff = {}
-
-
 def get_diff(data1, data2):
+    diff = {}
     for k in sorted(set(data1.keys()) | set(data2.keys())):
         if k in data1 and k in data2:
             if isinstance(data1[k], dict) and isinstance(data2[k], dict):

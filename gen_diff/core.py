@@ -25,5 +25,3 @@ def open_file(file, extension):
         with open(file) as f:
             data = yaml.safe_load(f)
         return data
-
-
