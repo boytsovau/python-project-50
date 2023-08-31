@@ -8,6 +8,7 @@ def generate_diff(file1, file2, format='stylish'):
     data2 = open_file(file2, check_extension(file2))
 
     diff = get_diff(data1, data2)
+    print(diff)
     result = formater(diff, format)
     return result
 
@@ -50,5 +51,5 @@ def formater(diff, format):
 
 
 if __name__ == '__main__':
-    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.yaml")
+    diff = generate_diff("./tests/fixtures/file1.json", "./tests/fixtures/file2.yaml")
     print(diff)
