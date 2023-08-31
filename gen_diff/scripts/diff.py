@@ -42,7 +42,7 @@ def get_diff(data1, data2):
 def formater(diff, format):
     if format == 'stylish':
         result = stylish_format(diff)
-    return result
+        return result
 
 
 if __name__ == '__main__':
