@@ -1,4 +1,3 @@
-from gen_diff.core import get_offset
 
 
 def stylish_format(data, depth=1):
@@ -35,6 +34,15 @@ def to_string(value, depth=1):
     else:
         result = str(value)
     return result
+
+
+LEVEL_INDENT = 4
+OFFSET = 2
+
+
+def get_offset(depth):
+    result = LEVEL_INDENT * depth - OFFSET
+    return ' ' * result
 
 
 if __name__ == '__main__':
