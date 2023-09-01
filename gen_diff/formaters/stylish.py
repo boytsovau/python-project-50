@@ -2,6 +2,7 @@ from gen_diff.core import get_offset
 
 result = []
 
+
 def stylish_format(data, depth=1):
 
     for key, val in data.items():

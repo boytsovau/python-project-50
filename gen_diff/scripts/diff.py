@@ -1,5 +1,6 @@
 from gen_diff.core import open_file, check_extension
 from gen_diff.formaters.stylish import stylish_format
+from gen_diff.formaters.plain import plain_format
 
 
 def generate_diff(file1, file2, format='stylish'):
@@ -41,11 +42,11 @@ def get_diff(data1, data2):
 
 def formater(diff, format):
     if format == 'stylish':
-        result = stylish_format(diff)
-        return result
-    return result
+        return stylish_format(diff)
+    if format == 'plain':
+        return plain_format(diff)
 
 
 if __name__ == '__main__':
-    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.json")
+    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.json", 'plain')
     print(diff)
