@@ -1,4 +1,3 @@
-import pytest
 from gen_diff.scripts.diff import generate_diff
 
 
@@ -27,6 +26,12 @@ def test_json_plain():
     with open("tests/fixtures/expected4.txt", 'r') as file:
         expected = file.read()
     diff = generate_diff("tests/fixtures/file3.json", "tests/fixtures/file4.json", 'plain')
+    assert diff == expected
+
+def test_yaml_plain():
+    with open("tests/fixtures/expected4.txt", 'r') as file:
+        expected = file.read()
+    diff = generate_diff("tests/fixtures/file3.yaml", "tests/fixtures/file4.yaml", 'plain')
     assert diff == expected
 
 
