@@ -1,5 +1,5 @@
 import pytest
-from gen_diff.gene import generate_diff
+from gen_diff.generate_diff import generate_diff
 
 # Параметры для тестов
 test_cases = [
