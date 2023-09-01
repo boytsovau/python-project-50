@@ -48,6 +48,8 @@ def formater(diff, format):
         return plain_format(diff)
     if format == 'json':
         return json_format(diff)
+    else:
+        return "format error"
 
 
 if __name__ == '__main__':
