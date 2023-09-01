@@ -53,5 +53,5 @@ def formater(diff, format):
 
 
 if __name__ == '__main__':
-    diff = generate_diff("./tests/fixtures/file.yaml", "./tests/fixtures/file4.yaml", 'plain')
+    diff = generate_diff("./tests/fixtures/file3.yaml", "./tests/fixtures/file4.yaml", 'plain')
     print(diff)
