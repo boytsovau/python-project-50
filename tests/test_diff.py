@@ -1,59 +1,29 @@
+import pytest
 from gen_diff.scripts.diff import generate_diff
 
-
-def test_json():
-    with open("tests/fixtures/expected.txt", 'r') as file:
-        expected = file.read()
-    diff = generate_diff("tests/fixtures/file1.json",
-                         "tests/fixtures/file2.json")
-    assert diff == expected
-
-
-def test_yml():
-    with open("tests/fixtures/expected.txt", 'r') as file:
-        expected = file.read()
-    diff = generate_diff("tests/fixtures/file1.yml",
-                         "tests/fixtures/file2.yaml")
-    assert diff == expected
+# Параметры для тестов
+test_cases = [
+    ("tests/fixtures/file1.json", "tests/fixtures/file2.json", "expect.txt", "stylish"),
+    ("tests/fixtures/file1.yml", "tests/fixtures/file2.yaml", "expect.txt", "stylish"),
+    ("tests/fixtures/file3.json", "tests/fixtures/file4.json", "res_stylish.txt", "stylish"),
+    ("tests/fixtures/file3.yaml", "tests/fixtures/file4.yaml", "res_stylish.txt", "stylish"),
+    ("tests/fixtures/file3.json", "tests/fixtures/file4.json", "res_plain.txt", "plain"),
+    ("tests/fixtures/file3.yaml", "tests/fixtures/file4.yaml", "res_plain.txt", "plain"),
+    ("tests/fixtures/file3.json", "tests/fixtures/file4.json", "res_json.txt", "json"),
+]
 
 
-def test_json_stylish():
-    with open("tests/fixtures/res_json_stylish.txt", 'r') as file:
-        expected = file.read()
-    diff = generate_diff("tests/fixtures/file3.json",
-                         "tests/fixtures/file4.json")
-    assert diff == expected
+@pytest.fixture
+def expected(request):
+    def load_expected(file_path):
+        with open(file_path, 'r') as file:
+            return file.read()
+    return load_expected(f"tests/fixtures/{request.param}")
 
 
-def test_yaml_stylish():
-    with open("tests/fixtures/res_yaml_stylish.txt", 'r') as file:
-        expected = file.read()
-    diff = generate_diff("tests/fixtures/file3.yaml",
-                         "tests/fixtures/file4.yaml")
-    assert diff == expected
-
-
-def test_json_plain():
-    with open("tests/fixtures/res_json_plain.txt", 'r') as file:
-        expected = file.read()
-    diff = generate_diff("tests/fixtures/file3.json",
-                         "tests/fixtures/file4.json", 'plain')
-    assert diff == expected
-
-
-def test_yaml_plain():
-    with open("tests/fixtures/res_yaml_plain.txt", 'r') as file:
-        expected = file.read()
-    print(expected)
-    diff = generate_diff("tests/fixtures/file3.yaml",
-                         "tests/fixtures/file4.yaml", 'plain')
-    print(diff)
-    assert diff == expected
-
-
-def test_json_js():
-    with open("tests/fixtures/res_json.txt", 'r') as file:
-        expected = file.read()
-    diff = generate_diff("tests/fixtures/file3.json",
-                         "tests/fixtures/file4.json", 'json')
-    assert diff == expected
+@pytest.mark.parametrize("file1, file2, expected, format", test_cases)
+def test_generate_diff(file1, file2, expected, format):
+    with open(f"tests/fixtures/{expected}", 'r') as file:
+        expected_output = file.read()
+    diff = generate_diff(file1, file2, format)
+    assert diff == expected_output
