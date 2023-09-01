@@ -3,8 +3,8 @@ from gen_diff.generate_diff import generate_diff
 
 # Параметры для тестов
 test_cases = [
-    ("tests/fixtures/file1.json", "tests/fixtures/file2.json", "expect.txt", "stylish"),
-    ("tests/fixtures/file1.yml", "tests/fixtures/file2.yaml", "expect.txt", "stylish"),
+    ("tests/fixtures/file1.json", "tests/fixtures/file2.json", "expect.txt", None),
+    ("tests/fixtures/file1.yml", "tests/fixtures/file2.yaml", "expect.txt", None),
     ("tests/fixtures/file3.json", "tests/fixtures/file4.json", "res_stylish.txt", "stylish"),
     ("tests/fixtures/file3.yaml", "tests/fixtures/file4.yaml", "res_stylish.txt", "stylish"),
     ("tests/fixtures/file3.json", "tests/fixtures/file4.json", "res_plain.txt", "plain"),
