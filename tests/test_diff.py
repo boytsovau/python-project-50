@@ -13,14 +13,6 @@ test_cases = [
 ]
 
 
-@pytest.fixture
-def expected(request):
-    def load_expected(file_path):
-        with open(file_path, 'r') as file:
-            return file.read()
-    return load_expected(f"tests/fixtures/{request.param}")
-
-
 @pytest.mark.parametrize("file1, file2, expected, format", test_cases)
 def test_generate_diff(file1, file2, expected, format):
     with open(f"tests/fixtures/{expected}", 'r') as file:
