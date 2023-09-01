@@ -26,4 +26,4 @@ def test_generate_diff(file1, file2, expected, format):
     with open(f"tests/fixtures/{expected}", 'r') as file:
         expected_output = file.read()
     diff = generate_diff(file1, file2, format)
-    assert diff == expected_output
+    assert expected_output == diff
