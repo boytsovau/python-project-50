@@ -25,7 +25,7 @@ def test_json_stylish():
 def test_yaml_stylish():
     with open("tests/fixtures/res_yaml_stylish.txt", 'r') as file:
         expected = file.read()
-    diff = generate_diff("tests/fixtures/file3.yaml", "tests/fixtures/file4.yaml", 'plain')
+    diff = generate_diff("tests/fixtures/file3.yaml", "tests/fixtures/file4.yaml")
     assert diff == expected
 
 
