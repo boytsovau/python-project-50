@@ -35,8 +35,3 @@ def to_string(value, depth=1):
     else:
         result = str(value)
     return result
-
-
-if __name__ == '__main__':
-    data = {'common': {'action': 'nested', 'children': {'follow': {'value': False, 'action': 'added'}, 'setting1': {'value': 'Value 1', 'action': 'unchanged'}, 'setting2': {'value': 200, 'action': 'delete'}, 'setting3': {'action': 'update', 'old_value': True, 'new_value': None}, 'setting4': {'value': 'blah blah', 'action': 'added'}, 'setting5': {'value': {'key5': 'value5'}, 'action': 'added'}, 'setting6': {'action': 'nested', 'children': {'doge': {'action': 'nested', 'children': {'wow': {'action': 'update', 'old_value': '', 'new_value': 'so much'}}}, 'key': {'value': 'value', 'action': 'unchanged'}, 'ops': {'value': 'vops', 'action': 'added'}}}}}, 'group1': {'action': 'nested', 'children': {'baz': {'action': 'update', 'old_value': 'bas', 'new_value': 'bars'}, 'foo': {'value': 'bar', 'action': 'unchanged'}, 'nest': {'action': 'update', 'old_value': {'key': 'value'}, 'new_value': 'str'}}}, 'group2': {'value': {'abc': 12345, 'deep': {'id': 45}}, 'action': 'delete'}, 'group3': {'value': {'deep': {'id': {'number': 45}}, 'fee': 100500}, 'action': 'added'}}
-    print(stylish_format(data))
