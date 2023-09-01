@@ -51,5 +51,5 @@ def formater(diff, format):
 
 
 if __name__ == '__main__':
-    diff = generate_diff("./tests/fixtures/file3.json", "./tests/fixtures/file4.json", 'json')
+    diff = generate_diff("./tests/fixtures/file.yaml", "./tests/fixtures/file4.yaml", 'plain')
     print(diff)
