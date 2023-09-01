@@ -1,7 +1,5 @@
-result = []
-
-
 def plain_format(data, path=''):
+    result = []
     for key, val in data.items():
         action = val.get('action')
         match action:

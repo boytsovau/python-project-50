@@ -1,5 +1,5 @@
 import pytest
-from gen_diff.scripts.diff import generate_diff
+from gen_diff.generate_diff import generate_diff
 
 # Параметры для тестов
 test_cases = [
@@ -18,4 +18,4 @@ def test_generate_diff(file1, file2, expected, format):
     with open(f"tests/fixtures/{expected}", 'r') as file:
         expected_output = file.read()
         diff = generate_diff(file1, file2, format)
-        assert expected_output == diff
+    assert expected_output == diff
