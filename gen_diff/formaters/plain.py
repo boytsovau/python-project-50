@@ -15,7 +15,7 @@ def plain_format(data, path=''):
             case 'update':
                 result.append(f"Property '{path}{key}' was updated. "
                               f"From {check_val(val['old_value'])} "
-                              f"to {check_val(val['new_value'])}") 
+                              f"to {check_val(val['new_value'])}")
     return '\n'.join(result)
 
 
