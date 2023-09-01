@@ -50,3 +50,7 @@ Generating a report in the form of plain text, stylish and json
 
 [![asciicast](https://asciinema.org/a/605790.svg)](https://asciinema.org/a/605790)
 
+
+#### json format
+
+[![asciicast](https://asciinema.org/a/605793.svg)](https://asciinema.org/a/605793)
