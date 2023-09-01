@@ -27,3 +27,10 @@ def test_json_plain():
         expected = file.read()
     diff = generate_diff("tests/fixtures/file3.json", "tests/fixtures/file4.json", 'plain')
     assert diff == expected
+
+
+def test_json_js():
+    with open("tests/fixtures/expected5.txt", 'r') as file:
+        expected = file.read()
+    diff = generate_diff("tests/fixtures/file3.json", "tests/fixtures/file4.json", 'json')
+    assert diff == expected
