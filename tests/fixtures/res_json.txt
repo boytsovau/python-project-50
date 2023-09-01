@@ -17,7 +17,9 @@
             "setting3": {
                 "action": "update",
                 "old_value": true,
-                "new_value": null
+                "new_value": {
+                    "key": "value"
+                }
             },
             "setting4": {
                 "value": "blah blah",
@@ -37,7 +39,7 @@
                         "children": {
                             "wow": {
                                 "action": "update",
-                                "old_value": "",
+                                "old_value": "too much",
                                 "new_value": "so much"
                             }
                         }
@@ -94,5 +96,52 @@
             "fee": 100500
         },
         "action": "added"
+    },
+    "group4": {
+        "action": "nested",
+        "children": {
+            "default": {
+                "action": "update",
+                "old_value": null,
+                "new_value": ""
+            },
+            "foo": {
+                "action": "update",
+                "old_value": 0,
+                "new_value": null
+            },
+            "isNested": {
+                "action": "update",
+                "old_value": false,
+                "new_value": "none"
+            },
+            "key": {
+                "value": false,
+                "action": "added"
+            },
+            "nest": {
+                "action": "nested",
+                "children": {
+                    "bar": {
+                        "action": "update",
+                        "old_value": "",
+                        "new_value": 0
+                    },
+                    "isNested": {
+                        "value": true,
+                        "action": "delete"
+                    }
+                }
+            },
+            "someKey": {
+                "value": true,
+                "action": "added"
+            },
+            "type": {
+                "action": "update",
+                "old_value": "bas",
+                "new_value": "bar"
+            }
+        }
     }
 }

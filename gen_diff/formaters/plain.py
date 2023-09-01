@@ -1,5 +1,7 @@
+result = []
+
+
 def plain_format(data, path=''):
-    result = []
     for key, val in data.items():
         action = val.get('action')
         match action:
@@ -20,9 +22,11 @@ def plain_format(data, path=''):
 def check_val(data):
     if isinstance(data, dict):
         return '[complex value]'
-    elif isinstance(data, bool):
+    if isinstance(data, bool):
         return str(data).lower()
-    elif data is None:
+    if data is None:
         return "null"
+    if isinstance(data, str):
+        return f"'{data}'"
     else:
-        return f"'{str(data)}'"
+        return str(data)
