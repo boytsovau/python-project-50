@@ -20,27 +20,24 @@ Generating a report in the form of plain text, stylish and json
 
 # Usage:
 
-    gendiff -h
-    usage: gendiff [-h] [--f FORMAT] first_file second_file
+usage: gendiff [-h] [-f FORMAT] first_file second_file
 
-    Compares two configuration files and shows a difference
+Compares two configuration files and shows a difference
 
-    positional arguments:
-    first_file
-    second_file
+positional arguments:
+  first_file
+  second_file
 
-    options:
-    -h, --help            show this help message and exit
-    --f FORMAT, --format FORMAT
-                            set format of output
+options:
+  -h, --help            show this help message and exit
+  -f FORMAT, --format FORMAT
+                        set format of output, plain or json, stylish is default
 
 
 
 # Example
 
-[![asciicast](https://asciinema.org/a/599583.svg)](https://asciinema.org/a/599583)
-
-[![asciicast](https://asciinema.org/a/605579.svg)](https://asciinema.org/a/605579)
+[![asciicast](https://asciinema.org/a/606237.svg)](https://asciinema.org/a/606237)
 
 #### stylish format
 
