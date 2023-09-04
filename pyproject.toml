@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["boytsovau <alexbonch@gmail.com>"]
 readme = "README.md"
-packages = [{include = "gen_diff"}]
+packages = [{include = "gendiff"}]
 
 classifiers = [
     "Topic :: File Formats"
@@ -17,7 +17,7 @@ pyyaml = "^6.0.1"
 
 [tool.poetry.scripts]
 
-gendiff = "gen_diff.scripts.diff:main"
+gendiff = "gendiff.scripts.diff:main"
 
 
 [tool.poetry.group.dev.dependencies]
