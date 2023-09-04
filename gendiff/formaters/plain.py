@@ -9,7 +9,8 @@ def plain(data):
                 case 'nested':
                     plain_format(val['children'], f'{path}{key}.')
                 case 'added':
-                    result.append(f"Property '{path}{key}' was added with value: "
+                    result.append(f"Property '{path}{key}' "
+                                  f"was added with value: "
                                   f"{check_val(val['value'])}")
                 case 'delete':
                     result.append(f"Property '{path}{key}' was removed")
