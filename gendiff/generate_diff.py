@@ -1,6 +1,6 @@
-from gen_diff.core import open_file, check_extension
-from gen_diff.create_diff import get_diff
-from gen_diff.format_check import formater
+from gendiff.core import open_file, check_extension
+from gendiff.create_diff import get_diff
+from gendiff.format_check import formater
 
 
 def generate_diff(file1, file2, format='stylish'):

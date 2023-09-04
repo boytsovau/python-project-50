@@ -1,4 +1,4 @@
-from gen_diff.core import get_offset
+from gendiff.core import get_offset
 
 result = []
 
