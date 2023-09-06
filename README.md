@@ -7,7 +7,7 @@
 # Difference Calculator
 
 
-The difference calculator is a program that determines the difference between two data structures.
+Difference Calculator is a program that determines the difference between two files
 
 Utility Features:
 
