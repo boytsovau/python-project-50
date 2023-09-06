@@ -8,28 +8,28 @@ def get_offset(depth):
 
 
 def stylish(data):
-
     result = []
-
-    def stylish_format(data, depth=1):
-        for key, val in data.items():
-            action = val.get('action')
-            match action:
-                case 'nested':
-                    result.append(f"{get_offset(depth)}  {key}: {{")
-                    stylish_format(val['children'], depth + 1)
-                    result.append(f"{get_offset(depth)}  }}")
-                case 'unchanged':
-                    result.append(f"{get_offset(depth)}  {key}: {to_string(val['value'], depth)}")
-                case 'update':
-                    result.append(f"{get_offset(depth)}- {key}: {to_string(val['old_value'], depth)}")
-                    result.append(f"{get_offset(depth)}+ {key}: {to_string(val['new_value'], depth)}")
-                case 'delete':
-                    result.append(f"{get_offset(depth)}- {key}: {to_string(val['value'], depth)}")
-                case 'added':
-                    result.append(f"{get_offset(depth)}+ {key}: {to_string(val['value'], depth)}")
-    stylish_format(data)
+    stylish_format(data, result)
     return '{\n' + '\n'.join(result) + '\n}'
+
+
+def stylish_format(data, result, depth=1):
+    for key, val in data.items():
+        action = val.get('action')
+        match action:
+            case 'nested':
+                result.append(f"{get_offset(depth)}  {key}: {{")
+                stylish_format(val['children'], result, depth + 1)
+                result.append(f"{get_offset(depth)}  }}")
+            case 'unchanged':
+                result.append(f"{get_offset(depth)}  {key}: {to_string(val['value'], depth)}")
+            case 'update':
+                result.append(f"{get_offset(depth)}- {key}: {to_string(val['old_value'], depth)}")
+                result.append(f"{get_offset(depth)}+ {key}: {to_string(val['new_value'], depth)}")
+            case 'delete':
+                result.append(f"{get_offset(depth)}- {key}: {to_string(val['value'], depth)}")
+            case 'added':
+                result.append(f"{get_offset(depth)}+ {key}: {to_string(val['value'], depth)}")
 
 
 def to_string(value, depth=1):
