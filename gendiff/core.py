@@ -8,12 +8,22 @@ def get_extension(file):
     return data
 
 
+def read_file(file):
+    with open(file) as f:
+        return f.read()
+
+
+def parse_json(content):
+    return json.loads(content)
+
+
+def parse_yaml(content):
+    return yaml.safe_load(content)
+
+
 def open_file(file, extension):
+    content = read_file(file)
     if extension == 'json':
-        with open(file) as f:
-            data = json.load(f)
-        return data
-    if extension == "yml" or "yaml":
-        with open(file) as f:
-            data = yaml.safe_load(f)
-        return data
+        return parse_json(content)
+    elif extension in ["yml", "yaml"]:
+        return parse_yaml(content)
