@@ -1,11 +1,11 @@
-def get_diff(data1, data2):
+def compare_data(data1, data2):
     diff = {}
     for k in sorted(set(data1.keys()) | set(data2.keys())):
         if k in data1 and k in data2:
             if isinstance(data1[k], dict) and isinstance(data2[k], dict):
                 diff[f'{k}'] = {
                     'action': 'nested',
-                    'children': get_diff(data1[k], data2[k])}
+                    'children': compare_data(data1[k], data2[k])}
             elif data1[k] == data2[k]:
                 diff[f'{k}'] = {
                     'value': data1[k],

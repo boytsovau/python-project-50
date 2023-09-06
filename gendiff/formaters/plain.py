@@ -11,18 +11,18 @@ def plain(data):
                 case 'added':
                     result.append(f"Property '{path}{key}' "
                                   f"was added with value: "
-                                  f"{check_val(val['value'])}")
+                                  f"{get_val(val['value'])}")
                 case 'delete':
                     result.append(f"Property '{path}{key}' was removed")
                 case 'update':
                     result.append(f"Property '{path}{key}' was updated. "
-                                  f"From {check_val(val['old_value'])} "
-                                  f"to {check_val(val['new_value'])}")
+                                  f"From {get_val(val['old_value'])} "
+                                  f"to {get_val(val['new_value'])}")
     plain_format(data)
     return '\n'.join(result)
 
 
-def check_val(data):
+def get_val(data):
     if isinstance(data, dict):
         return '[complex value]'
     if isinstance(data, bool):

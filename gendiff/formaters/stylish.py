@@ -1,4 +1,10 @@
-from gendiff.core import get_offset
+LEVEL_INDENT = 4
+OFFSET = 2
+
+
+def get_offset(depth):
+    result = LEVEL_INDENT * depth - OFFSET
+    return ' ' * result
 
 
 def stylish(data):
