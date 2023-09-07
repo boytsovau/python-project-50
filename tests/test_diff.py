@@ -6,8 +6,8 @@ FIXTURE_PATH = f"{os.path.dirname(os.path.abspath(__file__))}/fixtures"
 
 # Параметры для тестов
 test_cases = [
-    ("file1.json", "file2.json", "expect.txt", None),
-    ("file1.yml", "file2.yaml", "expect.txt", None),
+    ("file1.json", "file2.json", "expect.txt", "stylish"),
+    ("file1.yml", "file2.yaml", "expect.txt", "stylish"),
     ("file3.json", "file4.json", "res_stylish.txt", "stylish"),
     ("file3.yaml", "file4.yaml", "res_stylish.txt", "stylish"),
     ("file3.json", "file4.json", "res_plain.txt", "plain"),

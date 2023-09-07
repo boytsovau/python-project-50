@@ -46,6 +46,8 @@ def to_string(value, depth=1):
         result.append(str(value).lower())
     if value is None:
         result.append("null")
-    else:
+    if isinstance(value, int) and not isinstance(value, bool):
         result.append(str(value))
+    if isinstance(value, str):
+        result.append(value)
     return '\n'.join(result)
