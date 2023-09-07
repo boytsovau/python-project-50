@@ -42,9 +42,9 @@ def to_string(value, depth=1):
         for key, val in value.items():
             result.append(f"{get_offset(depth + 1)}  {key}: {to_string(val, depth + 1)}")
         result.append(f"{get_offset(depth)}  }}")
-    elif isinstance(value, bool):
+    if isinstance(value, bool):
         result.append(str(value).lower())
-    elif value is None:
+    if value is None:
         result.append("null")
     else:
         result.append(str(value))

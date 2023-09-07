@@ -1,7 +1,7 @@
 from gendiff.generate_diff import generate_diff
-from gendiff.cli import parser_args
+from gendiff.cli import parse_args
 
 
 def main():
-    args = parser_args()
+    args = parse_args()
     print(generate_diff(args.first_file, args.second_file, args.format))

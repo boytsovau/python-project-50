@@ -1,9 +1,15 @@
 import argparse
+import textwrap
 
 
-def parser_args():
-    parser = argparse.ArgumentParser(description='Compares two configuration \
-                                            files and shows a difference')
+def parse_args():
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=textwrap.dedent('''\
+    Compares two configuration files and shows a difference
+
+    Support file extension: json, yml, yaml
+    '''))
     parser.add_argument('first_file')
     parser.add_argument('second_file')
     parser.add_argument('-f', '--format', metavar='FORMAT',

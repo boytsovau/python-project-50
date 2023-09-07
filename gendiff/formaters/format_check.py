@@ -8,5 +8,8 @@ def formater(diff, format):
         return plain(diff)
     elif format == 'json':
         return json_format(diff)
-    else:
+    elif format == 'stylish':
         return stylish(diff)
+    else:
+        raise ValueError(f"Command contains invalid format '{format}'."
+                         f" Use gendiff -h for help")
