@@ -1,6 +1,5 @@
 def plain(data):
-    result = plain_format(data)
-    return '\n'.join(result)
+    return plain_format(data)
 
 
 def plain_format(data, path=''):
@@ -9,7 +8,7 @@ def plain_format(data, path=''):
         action = val.get('action')
         match action:
             case 'nested':
-                plain_format(val['children'], f'{path}{key}.')
+                result.append(plain_format(val['children'], f'{path}{key}.'))
             case 'added':
                 result.append(f"Property '{path}{key}' "
                               f"was added with value: "
@@ -20,7 +19,7 @@ def plain_format(data, path=''):
                 result.append(f"Property '{path}{key}' was updated. "
                               f"From {get_val(val['old_value'])} "
                               f"to {get_val(val['new_value'])}")
-    return result
+    return '\n'.join(result)
 
 
 def get_val(data):

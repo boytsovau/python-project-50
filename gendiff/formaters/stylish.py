@@ -18,7 +18,7 @@ def stylish_format(data, depth=1):
         match action:
             case 'nested':
                 result.append(f"{get_offset(depth)}  {key}: {{")
-                stylish_format(val['children'], depth + 1)
+                result.append(stylish_format(val['children'], depth + 1))
                 result.append(f"{get_offset(depth)}  }}")
             case 'unchanged':
                 result.append(f"{get_offset(depth)}  {key}: {to_string(val['value'], depth)}")
@@ -29,7 +29,10 @@ def stylish_format(data, depth=1):
                 result.append(f"{get_offset(depth)}- {key}: {to_string(val['value'], depth)}")
             case 'added':
                 result.append(f"{get_offset(depth)}+ {key}: {to_string(val['value'], depth)}")
-    return '{\n' + '\n'.join(result) + '\n}'
+    if depth == 1:
+        result.insert(0, '{')
+        result.append('}')
+    return '\n'.join(result)
 
 
 def to_string(value, depth=1):
