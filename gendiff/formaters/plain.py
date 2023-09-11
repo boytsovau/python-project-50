@@ -12,17 +12,17 @@ def plain_format(data, path=''):
             case 'added':
                 result.append(f"Property '{path}{key}' "
                               f"was added with value: "
-                              f"{get_val(val['value'])}")
+                              f"{to_string(val['value'])}")
             case 'delete':
                 result.append(f"Property '{path}{key}' was removed")
             case 'update':
                 result.append(f"Property '{path}{key}' was updated. "
-                              f"From {get_val(val['old_value'])} "
-                              f"to {get_val(val['new_value'])}")
+                              f"From {to_string(val['old_value'])} "
+                              f"to {to_string(val['new_value'])}")
     return '\n'.join(result)
 
 
-def get_val(data):
+def to_string(data):
     if isinstance(data, dict):
         return '[complex value]'
     if isinstance(data, bool):
@@ -31,5 +31,4 @@ def get_val(data):
         return "null"
     if isinstance(data, str):
         return f"'{data}'"
-    else:
-        return str(data)
+    return str(data)

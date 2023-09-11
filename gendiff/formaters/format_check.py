@@ -10,6 +10,5 @@ def formater(diff, format):
         return json_format(diff)
     elif format == 'stylish':
         return stylish(diff)
-    else:
-        raise ValueError(f"Command contains invalid format '{format}'."
-                         f" Use gendiff -h for help")
+    raise ValueError(f"Command contains invalid format '{format}'."
+                     f" Use gendiff -h for help")
