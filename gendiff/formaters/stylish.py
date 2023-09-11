@@ -42,12 +42,12 @@ def to_string(value, depth=1):
         for key, val in value.items():
             result.append(f"{get_offset(depth + 1)}  {key}: {to_string(val, depth + 1)}")
         result.append(f"{get_offset(depth)}  }}")
+        return '\n'.join(result)
     if isinstance(value, bool):
-        result.append(str(value).lower())
+        return str(value).lower()
     if value is None:
-        result.append("null")
+        return "null"
     if isinstance(value, int) and not isinstance(value, bool):
-        result.append(str(value))
+        return str(value)
     if isinstance(value, str):
-        result.append(value)
-    return '\n'.join(result)
+        return value
